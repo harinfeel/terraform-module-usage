@@ -65,8 +65,6 @@ lrwxrwxrwx 1 harin harin  87 Jan  8 13:11 linux_amd64 -> /home/harin/.terraform.
 5. EC2
 6. RDS
 
-
-
 ### Tip
 Terraform 모듈 사용시 git이나 gitlab의 저장소에서 다운받아 사용하게 구성되어 있습니다. Terraform 모듈중 SecurityGroup을 반복해서 사용해야 하는 경우를 가정합니다. 이 경우에 같은 SecurityGroup의 모듈을 사용하지만 모듈 이름을 name1, name2라고 지정해야 합니다. 이러한 경우 해당 이름별로 git저장소에서 다운로드를 받아 name1, name2의 디렉토리별로 저장하여 중복된 소스를 저장하게 됩니다.  
 

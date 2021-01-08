@@ -1,6 +1,6 @@
 module "security_group" {
-  source = "../.terraform/modules/security_group"
-  #source = "terraform-aws-modules/security-group/aws"
+  #source = "../.terraform/modules/security_group"
+  source = "terraform-aws-modules/security-group/aws"
 
   name        = var.name
   description = "Security group for http,https with http,https ports open within VPC"
@@ -40,8 +40,8 @@ module "security_group" {
 
 
 module "security_group_bastion" {
-  source = "../.terraform/modules/security_group"
-  #source = "terraform-aws-modules/security-group/aws"
+  #source = "../.terraform/modules/security_group"
+  source = "terraform-aws-modules/security-group/aws"
 
   name        = var.name_bastion
   description = "Security group for ssh with SSH ports open within VPC"
