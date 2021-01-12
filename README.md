@@ -9,6 +9,7 @@ Terraform 모듈 테스트는 Windows10 기반 WSL2-Ubuntu-20.04 에서 작업�
 ## 디렉토리 구성
 vpc, security_group, alb, ec2 등으로 구성되어 있으며 계속 추가 될 예정입니다.
 ```
+├── acm
 ├── alb
 ├── ec2
 ├── security_group
@@ -82,5 +83,3 @@ Terraform 모듈 사용시 git이나 gitlab의 저장소에서 다운받아 사�
 -  source = "terraform-aws-modules/security-group/aws"
 +  source = "../.terraform/modules/security_group"
 ```
-
-
