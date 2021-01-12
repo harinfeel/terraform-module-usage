@@ -1,5 +1,11 @@
-###### Security Group Variables
-variable "name_gitlab" {
+## Domain name
+variable "domain_name" {
+  description = "The resource name and Name tag of the domain name."
+  type        = string
+  default     = null
+}
+## Security Group Variables
+variable "lb_name" {
   description = "The resource name and Name tag of the load balancer."
   type        = string
   default     = null
@@ -17,12 +23,6 @@ variable "internal" {
   default     = false
 }
 
-variable "name_prefix" {
-  description = "The resource name prefix and Name tag of the load balancer. Cannot be longer than 6 characters"
-  type        = string
-  default     = null
-}
-
 variable "load_balancer_type" {
   description = "The type of load balancer to create. Possible values are application or network."
   type        = string
@@ -35,44 +35,84 @@ variable "access_logs" {
   default     = {}
 }
 
-variable "subnets" {
-  description = "A list of subnets to associate with the load balancer. e.g. ['subnet-1a2b3c4d','subnet-1a2b3c4e','subnet-1a2b3c4f']"
-  type        = list(string)
-  default     = null
-}
-
-variable "subnet_mapping" {
-  description = "A list of subnet mapping blocks describing subnets to attach to network load balancer"
-  type        = list(map(string))
-  default     = []
-}
-
-variable "tags" {
-  description = "A map of tags to add to all resources"
-  type        = map(string)
-  default     = {}
-}
-
-variable "lb_tags" {
-  description = "A map of tags to add to load balancer"
-  type        = map(string)
-  default     = {}
-}
-
-variable "target_group_tags" {
-  description = "A map of tags to add to all target groups"
-  type        = map(string)
-  default     = {}
-}
-
-variable "security_groups" {
-  description = "The security groups to attach to the load balancer. e.g. [\"sg-edcd9784\",\"sg-edcd9785\"]"
-  type        = list(string)
-  default     = []
-}
-
 variable "target_groups" {
   description = "A list of maps containing key/value pairs that define the target groups to be created. Order of these maps is important and the index of these are to be referenced in listener definitions. Required key/values: name, backend_protocol, backend_port"
   type        = any
   default     = []
 }
+
+variable "name_prefix" {
+  description = "The resource name prefix and Name tag of the load balancer. Cannot be longer than 6 characters"
+  type        = string
+  default     = null
+}
+
+variable "backend_protocol" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+variable "backend_port" {
+  description = ""
+  type        = number
+  default     = 80
+}
+
+variable "target_type" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+variable "interval" {
+  description = ""
+  type        = number
+  default     = 30
+}
+
+
+variable "path" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+
+variable "port" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+
+variable "healthy_threshold" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+variable "unhealthy_threshold" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+variable "timeout" {
+  description = ""
+  type        = string
+  default     = ""
+}
+
+variable "protocol" {
+  description = ""
+  type        = string
+  default     = "HTTP"
+}
+
+variable "matcher" {
+  description = ""
+  type        = string
+  default     = ""
+}
+

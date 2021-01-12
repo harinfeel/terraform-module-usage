@@ -10,10 +10,3 @@ variable "private_zone" {
   type        = bool
   default     = false
 }
-
-variable "domain_name" {
-  description = "The resource name and Name tag of the domain name."
-  type        = string
-  default     = null
-}
-
