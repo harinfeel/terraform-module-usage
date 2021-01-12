@@ -1,7 +1,7 @@
 # Terraform ACM Module
 본 문서는 Terraform Module을 활용한 AWS ACM 구성 문서입니다.
 
-**`중요`**
+**`중요`**  
 ACM을 등록 할 때 Private, Public의 종류 관계없이 반드시 Route53 Hostedzone이 사전에 등록되어 있어야 합니다. 
 
 ### Configuration
@@ -15,3 +15,12 @@ zone_name = "cloudev.cf" # ACM을 등록할 Hosted zone 이름
 private_zone = false # Publci, Private을 구분
 ```
 
+위와 같이 설정하고 등록 할 경우 cloudev.cf와 *.cloudev.cf가 ACM에 등록됩니다.
+
+### 사용법
+```bash
+cd acm
+terraform init
+terraform plan -var-file=acm.tfvars
+terraform apply -var-file=acm.tfvars
+```
