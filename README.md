@@ -56,15 +56,32 @@ lrwxrwxrwx 1 harin harin  87 Jan  8 13:11 linux_amd64 -> /home/harin/.terraform.
 ```
 해당 작업을 완료하면 terraform init 세팅후 provider를 한번 받아놓은 후에는 저장된 디렉토리에 링크를 걸고 사용하게 됩니다.
 
+`provider.tf`  
+해당 파일은 각 모듈 모두 동일하게 사용하므로 링크를 걸어 사용합니다. 사용자의 Credential file의 경로를 지정해서 사용합니다.
+
+```bash
+$ cat provider.tf
+# Configure the AWS Provider
+provider "aws" {
+  shared_credentials_file = "/home/harin/.aws/credentials" # AWS Access, Secret key path
+  region                  = "ap-northeast-2" # Region
+}
+
+$ cat /home/harin/.aws/credentials 
+[default]
+aws_access_key_id = ********************* # AWS Access key
+aws_secret_access_key = ********************* # AWS Secret key
+```
+
 ### 사용법
-모든 모듈을 디렉토리별로 구성해 두었습니다. AWS 인프라 구성시 VPC가 없으면 Security Group을 생성 할 수 없듯이 Terraform Module도 생성 순서가 있습니다. 추후 추가되는 모듈들은 본 문서에 업데이트 될 예정입니다.
+모든 모듈을 디렉토리별로 구성해 두었습니다. AWS 인프라 구성시 VPC가 없으면 Security Group을 생성 할 수 없듯이 Terraform Module도 생성 순서가 있습니다. 추후 추가되거나 추가되어야 하는 모듈들은 본 문서에 업데이트 될 예정입니다.
 
 1. VPC
-2. IAM
-3. SecurityGroup
+2. SecurityGroup
+3. ACM
 4. ALB, NLB
-5. EC2
-6. RDS
+5. EC2 - 예정
+6. RDS - 예정
 
 ### Tip
 Terraform 모듈 사용시 git이나 gitlab의 저장소에서 다운받아 사용하게 구성되어 있습니다. Terraform 모듈중 SecurityGroup을 반복해서 사용해야 하는 경우를 가정합니다. 이 경우에 같은 SecurityGroup의 모듈을 사용하지만 모듈 이름을 name1, name2라고 지정해야 합니다. 이러한 경우 해당 이름별로 git저장소에서 다운로드를 받아 name1, name2의 디렉토리별로 저장하여 중복된 소스를 저장하게 됩니다.  
