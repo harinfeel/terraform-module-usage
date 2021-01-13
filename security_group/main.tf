@@ -1,6 +1,6 @@
 module "security_group" {
-  #source = "../.terraform/modules/security_group"
-  source = "terraform-aws-modules/security-group/aws"
+  source = "../.terraform/modules/security_group"
+  #source = "terraform-aws-modules/security-group/aws"
 
   name        = var.name
   description = "Security group for http,https with http,https ports open within VPC"
@@ -40,8 +40,8 @@ module "security_group" {
 
 
 module "security_group_bastion" {
-  #source = "../.terraform/modules/security_group"
-  source = "terraform-aws-modules/security-group/aws"
+  source = "../.terraform/modules/security_group"
+  #source = "terraform-aws-modules/security-group/aws"
 
   name        = var.name_bastion
   description = "Security group for ssh with SSH ports open within VPC"
@@ -70,6 +70,35 @@ module "security_group_bastion" {
     Name  = "sg-ssh"
     Environment = "Product"
     AllowSSH = "true"    
+    TerraformManaged = "true"
+  }
+}
+
+module "security_group_ec2" {
+  source = "../.terraform/modules/security_group"
+  #source = "terraform-aws-modules/security-group/aws"
+
+  name        = var.name_elb_to_ec2
+  description = "Security group for ELB with http ports open within VPC"
+  vpc_id      = data.aws_vpc.vpc.id
+
+  #ingress_cidr_blocks = ["0.0.0.0/0"]
+
+  computed_ingress_with_source_security_group_id = [
+    {
+      rule                     = var.ingress_rules_http
+      source_security_group_id = module.security_group.this_security_group_id
+    }
+  ]
+
+number_of_computed_ingress_with_source_security_group_id = 1
+
+  egress_rules = ["all-all"]
+
+  tags = {
+    Name  = "sg-elb-to-ec2"
+    Environment = "Product"
+    AllowSSH = "false"    
     TerraformManaged = "true"
   }
 }

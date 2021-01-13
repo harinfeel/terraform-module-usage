@@ -11,7 +11,7 @@ variable "name_bastion" {
   default     = ""
 }
 
-variable "name_alb_gitlab" {
+variable "name_elb_to_ec2" {
   description = "Name of security group"
   type        = string
   default     = ""
