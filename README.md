@@ -1,7 +1,6 @@
 # Terrafrom Module 사용하기
 - 본 문서는 Terraform 모듈을 활용하여 반복 작업을 최대한 줄이기 위해 작성되었습니다.  
 - 신규 고객에게 최초 AWS 인프라를 구성해 줄 때 (VPC, ALB, SecurityGroup 등) 본 문서에 사용된 모듈을 활용하여 손쉽게 구성할 수 있습니다.  
-- CTC SA 누구나 해당 모듈 작업에 참여하실 수 있습니다.
 
 ## Module 작성 환경
 Terraform 모듈 테스트는 Windows10 기반 WSL2-Ubuntu-20.04 에서 작업하였습니다.  
